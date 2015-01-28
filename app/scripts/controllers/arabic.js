@@ -8,10 +8,12 @@
  * Controller of the arabicBuildingApp
  */
 angular.module('arabicBuildingApp')
-  .controller('ArabicCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('ArabicCtrl', function ($scope, ArabicFactory) {
+	$scope.arabic = ArabicFactory.getArabicArray()[0];
+	$scope.getWord = function(arabic, grammar, getAll) {
+		return ArabicFactory.getWord(arabic, grammar, getAll);
+	};
+	$scope.random = function() {
+		$scope.arabic = ArabicFactory.getRandomArabic();
+	}
   });

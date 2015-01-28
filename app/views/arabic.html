@@ -1,1 +1,44 @@
-<div>دَرَبْتُ زَيْدََ</div>
+<style type="text/css">
+	.arabic {
+		font-size:30px;
+		/*text-align: center;*/
+	}
+
+	.arabic-main {
+		font-size:40px;
+		text-align: center;
+	}
+
+
+	.exercise {
+		padding-bottom: 20px;
+	}
+</style>
+<div ng-init="showFull = true">
+	<div class="exercise">
+		<div class="arabic-main">{{arabic.arabic}}</div>
+		<ul>
+			<div ng-repeat="(grammar, value) in arabic.irab">
+				<li ng-init="parent=grammar">{{grammar}} : 
+					<span class="arabic" ng-if="!showFull">{{getWord(arabic, grammar, showFull)}}</span>
+					<span class="arabic" ng-if="showFull">
+						<div ng-show="false">{{ans = getWord(arabic, grammar, showFull)}}</div>
+						<span ng-repeat="x in ans.result"><span ng-if="ans.indexes.indexOf($index) >= 0" style="color:blue;">{{x}}&zwj;</span><span ng-if="ans.indexes.indexOf($index) == -1">{{x}}&zwj;</span></span>
+					</span>
+				</li>
+				<ul ng-repeat="(grammar, value) in value">
+					<li ng-if="grammar != 'nums'">{{grammar}} : 					
+						<span class="arabic" ng-if="!showFull">{{getWord(arabic, [parent, grammar], showFull)}}</span>
+						<span class="arabic" ng-if="showFull">
+							<div ng-show="false">{{ans = getWord(arabic, [parent, grammar], showFull)}}</div>
+							<span ng-repeat="x in ans.result"><span ng-if="ans.indexes.indexOf($index) >= 0" style="color:blue;">{{x}}&zwj;</span><span ng-if="ans.indexes.indexOf($index) == -1">{{x}}&zwj;</span></span>
+						</span>
+					</li>
+				</ul>
+			</div>
+		</ul>
+	</div>
+</div>
+<button class="btn btn-primary" ng-show="!showFull" ng-click="showFull = true">Show Full Sentence</button>
+<button class="btn btn-primary" ng-show="showFull" ng-click="showFull = false">Show Words Only</button>
+<button class="btn btn-primary" ng-click="random()">Next</button>
