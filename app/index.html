@@ -18,6 +18,21 @@
       body {
         background-color: #F2DACE;
       }
+      
+      .arabic {
+        font-size:30px;
+        /*text-align: center;*/
+      }
+
+      .arabic-main {
+        font-size:40px;
+        text-align: center;
+      }
+
+
+      .exercise {
+        padding-bottom: 20px;
+      }
     </style>
     <!-- endbuild -->
   </head>
@@ -32,6 +47,7 @@
         <ul class="nav nav-pills pull-right">
           <li class="active"><a ng-href="/#/">Home</a></li>
           <li><a ng-href="#/arabic">Arabic</a></li>
+          <li><a ng-href="#/exercise">Exercises</a></li>
           <li><a ng-href="#/about">About</a></li>
           <li><a ng-href="#">Contact</a></li>
         </ul>
@@ -77,12 +93,15 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
-        <script src="scripts/controllers/arabic.js"></script>
-        <script src="scripts/services/arabic.js"></script>
-        <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="bower_components/angular-dragdrop/src/angular-dragdrop.min.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/about.js"></script>
+    <script src="scripts/controllers/arabic.js"></script>
+    <script src="scripts/services/arabic.js"></script>
+    <script src="scripts/controllers/exercise.js"></script>
+    <!-- endbuild -->
 </body>
 </html>

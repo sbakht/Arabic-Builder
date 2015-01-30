@@ -39,10 +39,10 @@ describe('Service: Arabic', function () {
   });
 
   it('should get the word given a grammer type on top layer', function () {
-    var arabic = { arabic: 'دَرَبْتُ زَيْدََ', splitted: ['دَرَبْ', 'تُ', 'زَيْدََ'], irab: { fil: 0, fial: 1, mafoo_bihi: 2}, connector: [0]};
+    var arabic = { arabic: 'دَرَبْتُ زَيْدََ', splitted: ['دَرَبْ', 'تُ', 'زَيْدََ'], irab: { fil: 0, fial: 1, 'mafoo bihi': 2}, connector: [0]};
     var fil = ArabicFactory.getWord(arabic, 'fil');
     var fial = ArabicFactory.getWord(arabic, 'fial');
-    var mafoo_bihi = ArabicFactory.getWord(arabic, 'mafoo_bihi');
+    var mafoo_bihi = ArabicFactory.getWord(arabic, 'mafoo bihi');
 
     expect(fil).toBe(arabic.splitted[0]);
     expect(fial).toBe(arabic.splitted[1]);
@@ -69,6 +69,34 @@ describe('Service: Arabic', function () {
     var mudaf_elayhi = ArabicFactory.getWord(arabic, 'mudaf_elayhi');
 
     expect(mudaf_elayhi).toBe(arabic.splitted[1] + arabic.splitted[2]);
+  });
+
+  it('should check if given answer is correct', function () {
+    // var arabic = { arabic: 'دَرَبْتُ زَيْدََ', splitted: ['دَرَبْ', 'تُ', 'زَيْدََ'], irab: {fil: 0, fial: 1, 'mafoo bihi': 2}, connector: [0]};
+    var arabic = { arabic: 'زَيْدٌ وَلَدٌ حَسَنٌ', splitted: ['زَيْدٌ', 'وَلَدٌ', 'حَسَنٌ'], irab: {mubtada: 0, kabr: {nums: [1,2], mawsoof: 1, sifa: 2}}, connector: []};
+    var answer = {'mubtada':{'text':'زَيْدٌ'},'kabr':{'text':'وَلَدٌ حَسَنٌ','mawsoof':{'text':'وَلَدٌ '},'sifa':{'text':' حَسَنٌ'}}};
+    var correct = ArabicFactory.checkAnswer(arabic, answer);
+
+    expect(correct).toBe(true);
+
+    answer = {'mubtada':{'text':'زَيْدٌ'},'kabr':{'text':'وَلَدٌ حَسَنٌ','mawsoof':{'text':'وَلَدٌ'},'sifa':{'text':'wronganswer'}}};
+    var wrong = ArabicFactory.checkAnswer(arabic, answer);
+
+    expect(wrong).toBe(false);
+  });
+
+  it('should add correct/incorrect key to each grammar type', function () {
+    var arabic = { arabic: 'زَيْدٌ وَلَدٌ حَسَنٌ', splitted: ['زَيْدٌ', 'وَلَدٌ', 'حَسَنٌ'], irab: {mubtada: 0, kabr: {nums: [1,2], mawsoof: 1, sifa: 2, fake: 2}}, connector: []};
+    var answer = {'mubtada':{'text':'wrong mubtada'},'kabr':{'text':'وَلَدٌ حَسَنٌ','mawsoof':{'text':'وَلَدٌ'},'sifa':{'text':'wronganswer'}}};
+
+    expect(answer.mubtada.correct).toBeUndefined();
+    
+    var wrong = ArabicFactory.checkAnswer(arabic, answer);
+    expect(wrong).toBe(false);
+    expect(answer.mubtada.correct).toBe(false);
+    expect(answer.kabr.correct).toBe(true);
+    expect(answer.kabr.mawsoof.correct).toBe(true);
+    expect(answer.kabr.sifa.correct).toBe(false);
   });
 
 });

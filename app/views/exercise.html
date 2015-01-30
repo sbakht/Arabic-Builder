@@ -1,0 +1,96 @@
+    <style>
+      .thumbnail { height: 80px !important; }
+      .btn-droppable { width: 180px; height: 30px; padding-left: 4px; }
+      .btn-draggable { width: 160px; }
+      .emage { height: 215px; }
+    </style>
+
+<div class="arabic-main">{{arabic.arabic}}</div>
+
+<!-- <div>
+  <ul class="arabic">
+    <li ng-repeat="item in arabic.splitted | reverse" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="arabic.splitted" jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep'}">{{item}}</li>
+  </ul>
+</div> -->
+
+<!-- <div class="navbar-inner">
+  <div class="container form-inline" style="text-align: center;">
+    <div>
+      <div class="btn btn-info arabic btn-draggable" ng-repeat="item in arabic.splitted | reverse" ng-init="model = {index: $index, text: item}" data-drag="true" ng-model="model" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" jqyoui-draggable="{index: {{$index}},placeholder:'keep',animate:true}">{{item}}</div>
+    </div>
+  </div>
+</div>
+</br>
+</br>
+</br>
+</br>
+<ul>
+  <li>
+    <div class="thumbnail" data-drop="true" ng-model='list4' data-jqyoui-options="{accept:'.btn-draggable:not([ng-model=list4])'}"  jqyoui-droppable="{multiple:true, onDrop:onDrop()}">
+      <div class="caption">
+        <span class="arabic" ng-repeat="item in list4 | orderBy:'-index' track by $index" ng-model="list4"><span>{{item.text}}&zwj;</span></span>
+      </div>
+    </div>
+  </li>
+</ul> -->
+<div style="text-align:center;padding-top:10px;padding-bottom:10px;">
+  <div class="btn-group">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+      Add Grammar Type <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li><a ng-click="addInput('mubtada')">Add mubtada</a></li>
+      <li><a ng-click="addInput('kabr')">Add kabr</a></li>
+      <li><a ng-click="addInput('fil')">Add fail</a></li>
+      <li><a ng-click="addInput('fial')">Add fial</a></li>
+      <li><a ng-click="addInput('mafoo bihi')">Add mafoo bihi</a></li>
+      <li><a ng-click="addInput('mawsoof')">Add mawsoof</a></li>
+      <li><a ng-click="addInput('sifa')">Add sifa</a></li>
+      <li><a ng-click="addInput('mudaf')">Add mudaf</a></li>
+      <li><a ng-click="addInput('mudaf elayhi')">Add mudaf elayhi</a></li>
+    </ul>
+  </div>
+</div>
+
+<ul>
+<div ng-repeat="(type,value) in inputs">
+  <li>
+    <div class="btn-group">
+      <button type="button" class="btn btn-default">{{type}}</button>
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a ng-click="addInput([type, 'mubtada'])">Add mubtada</a></li>
+        <li><a ng-click="addInput([type, 'kabr'])">Add kabr</a></li>
+        <li><a ng-click="addInput([type, 'fil'])">Add fail</a></li>
+        <li><a ng-click="addInput([type, 'fial'])">Add fial</a></li>
+        <li><a ng-click="addInput([type, 'mafoo bihi'])">Add mafoo bihi</a></li>
+        <li><a ng-click="addInput([type, 'mawsoof'])">Add mawsoof</a></li>
+        <li><a ng-click="addInput([type, 'sifa'])">Add sifa</a></li>
+        <li><a ng-click="addInput([type, 'mudaf'])">Add mudaf</a></li>
+        <li><a ng-click="addInput([type, 'mudaf elayhi'])">Add mudaf elayhi</a></li>
+        <li role="presentation" class="divider"></li>
+        <li><a ng-click="remove(type)">Delete</a></li>
+      </ul>
+    </div>    
+    <input type="text" ng-model="value.text">
+  </li>
+  <ul>
+    <div ng-repeat="(type,value) in value">
+      <li ng-if="type != 'text' && type != 'correct'">{{type}} : <input type="text" ng-model="value.text"></li>
+    </div>
+  </ul>
+  </div>
+</ul>
+
+<div style="text-align:center;padding-top:200px;">
+  <button class="btn btn-info" ng-click="checkAnswer()">Check Answer</button>
+  <button class="btn btn-info" ng-click="random()">Next</button>
+</div>
+
+<div style="text-align:center;padding-top:10px;font-size:40px">
+  <div ng-if="answer == false" style="color:red">Incorrect</div>
+  <div ng-if="answer" style="color:green">Correct <span class="glyphicon glyphicon-check" aria-hidden="true"></span></div>
+</div>

@@ -14,7 +14,8 @@ angular
     'ngCookies',
     'ngResource',
     'ngRoute',
-    'ngSanitize'
+    'ngSanitize',
+    // 'ngDragDrop',
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -30,7 +31,16 @@ angular
         templateUrl: 'views/arabic.html',
         controller: 'ArabicCtrl'
       })
+      .when('/exercise', {
+        templateUrl: 'views/exercise.html',
+        controller: 'ExerciseCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
+  })
+  .filter("reverse", function(){
+    return function(items){
+        return items.slice().reverse(); // Create a copy of the array and reverse the order of the items
+    };
   });

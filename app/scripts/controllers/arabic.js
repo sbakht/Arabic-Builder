@@ -15,5 +15,5 @@ angular.module('arabicBuildingApp')
 	};
 	$scope.random = function() {
 		$scope.arabic = ArabicFactory.getRandomArabic();
-	}
+	};
   });
