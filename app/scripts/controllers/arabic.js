@@ -9,7 +9,7 @@
  */
 angular.module('arabicBuildingApp')
   .controller('ArabicCtrl', function ($scope, ArabicFactory) {
-	$scope.arabic = ArabicFactory.getArabicArray()[0];
+	$scope.arabic = ArabicFactory.getArabicArray()[3];
 	$scope.getWord = function(arabic, grammar, getAll) {
 		return ArabicFactory.getWord(arabic, grammar, getAll);
 	};

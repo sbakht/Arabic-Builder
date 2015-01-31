@@ -3,21 +3,10 @@
 		<div class="arabic-main">{{arabic.arabic}}</div>
 		<ul>
 			<div ng-repeat="(grammar, value) in arabic.irab">
-				<li ng-init="parent=grammar">{{grammar}} : 
-					<span class="arabic" ng-if="!showFull">{{getWord(arabic, grammar, showFull)}}</span>
-					<span class="arabic" ng-if="showFull">
-						<div ng-show="false">{{ans = getWord(arabic, grammar, showFull)}}</div>
-						<span ng-repeat="x in ans.result"><span ng-if="ans.indexes.indexOf($index) >= 0" style="color:blue;">{{x}}&zwj;</span><span ng-if="ans.indexes.indexOf($index) == -1">{{x}}&zwj;</span></span>
-					</span>
-				</li>
+				<irab arabic="arabic" parents="[]" grammar="grammar" show-sentence="showFull"></irab>
+				<div ng-show="false" ng-init="parents = [grammar]"></div>
 				<ul ng-repeat="(grammar, value) in value">
-					<li ng-if="grammar != 'nums'">{{grammar}} : 					
-						<span class="arabic" ng-if="!showFull">{{getWord(arabic, [parent, grammar], showFull)}}</span>
-						<span class="arabic" ng-if="showFull">
-							<div ng-show="false">{{ans = getWord(arabic, [parent, grammar], showFull)}}</div>
-							<span ng-repeat="x in ans.result"><span ng-if="ans.indexes.indexOf($index) >= 0" style="color:blue;">{{x}}&zwj;</span><span ng-if="ans.indexes.indexOf($index) == -1">{{x}}&zwj;</span></span>
-						</span>
-					</li>
+					<irab arabic="arabic" parents="parents" grammar="grammar" show-sentence="showFull"></irab>
 				</ul>
 			</div>
 		</ul>

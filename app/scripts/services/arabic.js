@@ -54,6 +54,9 @@ angular.module('arabicBuildingApp')
 
       if(grammer instanceof Array) {
         for(var i = 0; i < grammer.length; i++) {
+          console.log(nums);
+          console.log(grammer);
+          console.log(grammer[i]);
           nums = nums[grammer[i]];
         }
       }else{
@@ -157,11 +160,18 @@ angular.module('arabicBuildingApp')
       return result;
     }
 
+    function createExercise(arabic) {
+      arabic.splitted = arabic.splitted.split(' ');
+      arabic.splitted = arabic.splitted.slice().reverse();
+      // return arabic.splitted;
+    }
+
     return {
       getArabicArray : getArabicArray,
       getRandomArabic : randomArabic,
       join : join,
       getWord: getWord,
       checkAnswer: checkAnswer,
+      createExercise: createExercise,
     };
   });

@@ -1,0 +1,7 @@
+<li ng-if="grammar != 'nums'">{{grammar}} : 
+<span class="arabic" ng-if="!showSentence">{{getWord(grammarTree, showSentence)}}</span>
+<span class="arabic" ng-if="showSentence">
+	<div ng-show="false">{{ans = getWord(grammarTree, showSentence)}}</div>
+	<span ng-repeat="x in ans.result"><span ng-if="ans.indexes.indexOf($index) >= 0" style="color:blue;">{{x}}&zwj;</span><span ng-if="ans.indexes.indexOf($index) == -1">{{x}}&zwj;</span></span>
+</span>
+</li>
